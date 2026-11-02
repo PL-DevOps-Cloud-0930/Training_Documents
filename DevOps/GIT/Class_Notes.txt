@@ -988,3 +988,287 @@ Eg.:
 Next :::
 
 	GIT REVERT ::
+
+
+
+	
+#########################
+Day - 13 | 1st Nov. 2026
+#########################
+
+	GIT REVERT :::
+	
+	git revert :::
+	
+		- Git Revert is same as git reset --hard option 		
+		- git revert is used to undo a specific commit 		
+		- git revert will create a new commit point for tracking purpose.		
+		- git revert will maintain the commit history		
+		- git revert is recommended in shared repositories
+		
+		Syntax ::
+			git revert <specific_Commit_ID>
+			
+			
+	
+	Eg.:
+	
+		Repo1 
+		
+			main : 
+			
+						cm5	
+						cm4
+						cm3
+						cm2
+						cm1 
+			
+		
+			git revert cm3 
+			
+						New_Commit_for_revert
+						cm5	
+						cm4
+						cm3
+						cm2
+						cm1 						
+
+
+	- Git Branching Techniques ::::
+	
+	
+	- GIT Branches :::
+	
+	- Repo1 :
+	
+		git init 	-- main/master - Branch ==> Default Branch --> Production Version of the Source Code
+		
+		
+	- Parallel development :
+	
+		Program1 :	--> main Branch 
+		
+			Developer1 
+			
+			Developer2 
+			
+		Create a logical copy of the branch/Repo(main)
+		
+	- Git Branching Techniques 
+	
+		- Git Branch is the Logical copy of the Repository(default branch - master/main)
+		
+		- To perform parallel development without impacting other feature/user 
+	
+
+	- Repo:
+	
+		master : rel1,rel2,rel3,rel4		==> Production Version of the Source Code 
+		
+				rel1,rel2,rel3,rel4,rel5 		# rel5 is the feature_Branch changes		
+		
+			feature_Branch : rel1,rel2,rel3,rel4
+					: rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3
+					
+					Once the feature_Branch is ready with the changes,
+					
+					Upon thorough reviews and testing, Merge the feature_Branch Changes to main Branch
+
+
+
+	- Git Branching Strategies/Process :::
+	
+		- It is used to maintain the integrity of master/main branch
+
+
+	- Branching Strategies/Process :::
+	
+	- Scenario-1 :
+	
+			Repo1: 
+		
+				master : cm1,cm2,cm3,cm4 
+						
+						: cm1,cm2,cm3,cm4,cm5 			# cm5 is based the changes from developer1_feature_Branch
+						
+					developer1_feature_Branch : cm1,cm2,cm3,cm4 
+							: cm1,cm2,cm3,cm4,f1cm1,f1cm2,f1cm3
+							
+						merge the changes from developer1_feature_Branch to master 
+						
+						
+	- Scenario-2 :
+	
+		Repo1:
+		
+			master: rel1,rel2,rel3,rel4	
+
+					rel1,rel2,rel3,rel4,rel5			# rel5 Changes from Developer_Branch
+			
+				Developer_Branch: rel1,rel2,rel3,rel4	
+
+						rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+				
+					feature1 : rel1,rel2,rel3,rel4
+							rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+					
+					feature2 : rel1,rel2,rel3,rel4
+							rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4
+				
+
+	- Scenario-3 :
+	
+		Repo1: 
+
+			master: rel1,rel2,rel3,rel4	
+			
+					rel1,rel2,rel3,rel4,rel5									# rel5 Changes from Integration_Branch	
+			
+				Integration_Branch: rel1,rel2,rel3,rel4
+
+							rel1,rel2,rel3,rel4,Developer1_Changes,Developer2_Changes
+			
+					Developer1_Branch: rel1,rel2,rel3,rel4	
+
+							rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+					
+						feature1 : rel1,rel2,rel3,rel4
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+						
+						feature2 : rel1,rel2,rel3,rel4
+								rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4			
+								
+
+					Developer2_Branch: rel1,rel2,rel3,rel4	
+
+							rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+					
+						feature1 : rel1,rel2,rel3,rel4
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+						
+						feature2 : rel1,rel2,rel3,rel4
+								rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4	
+
+
+	- Scenario-4 :
+	
+		Repo1: 
+
+			master: rel1,rel2,rel3,rel4	
+			
+					rel1,rel2,rel3,rel4,rel5 									# rel5 Changes from Release_Branch	
+			
+				Release_Branch : rel1,rel2,rel3,rel4,Team1_Changes,Team2_Changes
+			
+					Integration_Branch1: rel1,rel2,rel3,rel4													# Team 1
+
+								rel1,rel2,rel3,rel4,Developer1_Changes,Developer2_Changes
+				
+						Developer1_Branch: rel1,rel2,rel3,rel4	
+
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+						
+							feature1 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+							
+							feature2 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4			
+									
+
+						Developer2_Branch: rel1,rel2,rel3,rel4	
+
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+						
+							feature1 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+							
+							feature2 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4	
+									
+									
+					Integration_Branch2: rel1,rel2,rel3,rel4													# Team 2
+
+								rel1,rel2,rel3,rel4,Developer1_Changes,Developer2_Changes
+				
+						Developer1_Branch: rel1,rel2,rel3,rel4	
+
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+						
+							feature1 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+							
+							feature2 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4			
+									
+
+						Developer2_Branch: rel1,rel2,rel3,rel4	
+
+								rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+						
+							feature1 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f1cm1,f1cm2,f1cm3,f1cm4
+							
+							feature2 : rel1,rel2,rel3,rel4
+									rel1,rel2,rel3,rel4,f2cm1,f2cm2,f2cm3,f2cm4	
+									
+  501  cd d:
+  502  cd PL_DevOps_2910
+  503  ls
+  504  clear
+  505  l
+  506  ls
+  507  mkdir samplerepo1
+  508  cd samplerepo1/
+  509  git init
+  510  clear
+  511  echo "rec1" >> f1.txt
+  512  git add .
+  513  git commit -m "cm1"
+  514  echo "rec1" >> f2.txt
+  515  git add .
+  516  git commit -m "cm2"
+  517  echo "rec1" >> f3.txt
+  518  git add .
+  519  git commit -m "cm3"
+  520  echo "rec1" >> f4.txt
+  521  git add .
+  522  git commit -m "cm4"
+  523  echo "rec1" >> f5.txt
+  524  git add .
+  525  git commit -m "cm5"
+  526  clear
+  527  git log --oneline
+  528  ls
+  529  git ls-files
+  530  git status
+  531  clear
+  532  git log --oneline
+  533  ls
+  534  git ls-files
+  535  git show 29eff0e
+  536  git revert 29eff0e
+  537  ls
+  538  git ls-files
+  539  git status
+  540  git log --oneline
+  541  git show 38f6d12
+  542  git log -oneline
+  543  git log --oneline
+  544  git revert 38f6d12
+  545  git log --oneline
+  546  ls
+  547  git ls-files
+  548  git log --oneline
+  549  ls
+  550  git show 41408a4
+  551  git revert 41408a4
+  552  git log --oneline
+  553  ls
+  554  git ls-files
+  555  ls
+  556  history
+
+
+Next: 
+
+	Working with Branches using git cli commands:
