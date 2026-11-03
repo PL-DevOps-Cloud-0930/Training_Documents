@@ -1272,3 +1272,57 @@ Day - 13 | 1st Nov. 2026
 Next: 
 
 	Working with Branches using git cli commands:
+
+
+
+#########################
+Day - 14 | 3rd Nov. 2026
+#########################
+
+	Working with Branches using git cli commands:
+	
+	
+	- git branch 							# Used to get the list of branches 
+	
+	- git branch <New_Branch_Name>			# Just Create New Branch 
+	
+	- git switch -c <New_Branch_Name>		# Create New Branch & switch the control to New Branch 
+	
+	- git switch <Existing_Branch_Name>		# To switch the control to any existing Branch
+	
+	- git merge <Source_Branch_Name>		# To merge the changes to the Target Branch 
+	
+	
+	Repo1: 
+	
+		master : cm1,cm2,cm3 
+		
+			cm1,cm2,cm3,f1cm1,f1cm2,f1cm3
+			
+			git switch -c feature1 			# Create feature1 Branch & switch the control to feature1 Branch 		
+		
+			feature1 : cm1,cm2,cm3 
+			
+				: cm1,cm2,cm3,f1cm1,f1cm2,f1cm3
+				
+					git switch master 		# Switch to Target Branch 
+					
+					git merge feature1		# Should be executed from the Target Branch 
+				
+					
+	Merge Conflict ::::
+
+		- When more than one user/feature try to update same file at the same level, merge conflict occurs.
+
+	How to Fix the Merge Conflicts :::
+	
+		- Identify the File(s) causing the Merge Conflict 
+		
+		- Open the file and Review the Changes 
+		
+		- Upon review, decide, which feature/user's change should be retained/remove from the traget branch 
+		
+		- Update the file causing the conflict by remove the extra header & footer notes and correct the file content.
+		
+		- perform git add & git commit to fix the conflict.
+			
