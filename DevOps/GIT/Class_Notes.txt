@@ -1325,4 +1325,100 @@ Day - 14 | 3rd Nov. 2026
 		- Update the file causing the conflict by remove the extra header & footer notes and correct the file content.
 		
 		- perform git add & git commit to fix the conflict.
+		
+	
+	On DevOps Perspective :::
+	
+	How to Handle Merge Conflicts :::
+	
+		- We Never Fix the Merge Conflict prevent the Conflict. 
+		
+			- Before Merge, do proper view.
 			
+	
+	GIT Techniques to Handle the Conflicts :::
+	
+	- GIT Rebase :::
+	
+		Git Rebase:::
+
+			- Rebase is used to maintain linear commit history 
+			- Rebase is used to keep the current branch in-sync with target branch 
+			- Rebase can prevent merge-conflicts in the target branch 
+			
+			- As a best practise, it is always recommended to use rebase before merge 
+			
+			
+	Repo1:
+		
+		- master : cm1,cm2,cm3
+		
+			cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4									# Upon Merging changes from feature1
+			
+			cm1,cm2,cm3,f2cm1,f2cm2,f2cm3,f2cm4,f1cm1,f1cm2,f1cm3,f1cm4			# Upon Merging changes from feature2 without proper rebase 	
+
+			cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4			# Expected Commit History with proper rebase 	
+				
+				
+			git branch feature1 feature2
+		
+			feature1: cm1,cm2,cm3
+		
+			feature2: cm1,cm2,cm3			
+		
+			git switch feature1 
+	
+				feature1: cm1,cm2,cm3
+				
+						cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4
+						
+						git switch master 
+						
+						git merge feature1
+						
+						
+			git switch feature2
+			
+				feature2: cm1,cm2,cm3
+					
+						cm1,cm2,cm3,f2cm1,f2cm2,f2cm3,f2cm4
+						
+						git rebase master 
+						
+						
+						cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4,f2cm1,f2cm2,f2cm3,f2cm4
+						
+						
+						git switch master 
+						
+						git merge feature2
+						
+						
+	
+	-> GIT SQUASH :::: 
+	
+		git merge --squash 
+		
+			--> Used to combine multiple commit points into single commit point 
+			
+		
+		Repo1:
+		
+			master : cm1,cm2,cm3 
+			
+				
+					cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4,.......................................,f1cm250
+			
+				
+				feature1 : cm1,cm2,cm3 
+						
+						cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f1cm4,.......................................,f1cm250
+						
+						
+						git switch master 
+						
+						
+						git merge --squash feature1 
+						
+							git commit -m "Combined Commits"
+
