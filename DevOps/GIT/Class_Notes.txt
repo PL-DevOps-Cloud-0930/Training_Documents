@@ -1422,3 +1422,349 @@ Day - 14 | 3rd Nov. 2026
 						
 							git commit -m "Combined Commits"
 
+  561  mkdir repo1
+  562  cd repo1/
+  563  git init
+  564  git status
+  565  git branch
+  566  echo "rec1" >> f1.txt
+  567  git add .
+  568  gi commit -m "cm1"
+  569  git commit -m "cm1"
+  570  git branch
+  571  git log --oneline
+  572  git branch feature1
+  573  git branch
+  574  git branch feature2
+  575  git branch
+  576  git log --oneline
+  577  ls
+  578  git switch feature1
+  579  git branch
+  580  git log --oneline
+  581  ls
+  582  git switch master
+  583  git switch -c feature3
+  584  git log --oneline
+  585  ls
+  586  echo "rec1" >> q1.txt
+  587  git add .
+  588  git commit -m "f3cm1"
+  589  git log --oneline
+  590  ls
+  591  git switch master
+  592  ls
+  593  git log --oneline
+  594  git merge feature3
+  595  ls
+  596  git log --oneline
+  597  clear
+  598  cd ..
+  599  ls
+  600  mkdir repo2
+  601  cd repo2/
+  602  clear
+  603  git init
+  604  echo "rec1" >> f1.txt
+  605  git add .
+  606  git commit -m "cm1"
+  607  git branch feature1
+  608  git branch feature2
+  609  clear
+  610  git branch
+  611  git log --oneline
+  612  ls
+  613  git switch feature1
+  614  ls
+  615  git log --oneline
+  616  ls
+  617  cat f1.txt
+  618  echo "record2 from feature1" >> f1.txt
+  619  cat f1.txt
+  620  git add .
+  621  git commit -m "f1cm1"
+  622  git log --oneline
+  623  cat f1.txt
+  624  git switch master
+  625  git log --oneline
+  626  ls
+  627  cat f1.txt
+  628  git merge feature1
+  629  cat f1.txt
+  630  git log --oneline
+  631  git switch feature2
+  632  ls
+  633  git log --oneline
+  634  cat f1.txt
+  635  echo "Record2 from feature2" >> f1.txt
+  636  git add .
+  637  git commit -m "f2cm1"
+  638  cat f1.txt
+  639  git switch master
+  640  git log --oneline
+  641  cat f1.txt
+  642  git merge feature2
+  643  git log --oneline
+  644  ls
+  645  git status
+  646  ls
+  647  cat f1.txt
+  648  vit f1.txt
+  649  vi f1.txt
+  650  cat f1.txt
+  651  git status
+  652  git add .
+  653  git commit -m "fixed Merge conflict"
+  654  git log --oneline
+  655  ls
+  656  cat f1.txt
+  657  clear
+  658  ls
+  659  cd ..
+  660  mkdir repo3
+  661  cd repo3/
+  662  clear
+  663  git init
+  664  echo "rec1" >> f1.txt
+  665  git add .
+  666  git commit -m "cm1"
+  667  echo "rec1" >> f2.txt
+  668  git add .
+  669  git commit -m "cm2"
+  670  echo "rec1" >> f3.txt
+  671  git add .
+  672  git commit -m "cm3"
+  673  clear
+  674  git log --oneline
+  675  git branch feature1
+  676  git branch feature2
+  677  git switch feature1
+  678  git log --oneline
+  679  ls
+  680  echo "rec1" >> l1.txt
+  681  git add .
+  682  git commit -m "f1cm1"
+  683  echo "rec1" >> l2.txt
+  684  git add .
+  685  git commit -m "f1cm2"
+  686  echo "rec1" >> l3.txt
+  687  git add .
+  688  git commit -m "f1cm3"
+  689  git log --oneline
+  690  git rebase master
+  691  git switch master
+  692  ls
+  693  git log --oneline
+  694  git merge feature1
+  695  ls
+  696  git log --oneline
+  697  git switch feature2
+  698  ls
+  699  git log --oneline
+  700  echo "rec1" >> w1.txt
+  701  git add .
+  702  git commit -m "f2cm1"
+  703  echo "rec1" >> w2.txt
+  704  git add .
+  705  git commit -m "f2cm2"
+  706  echo "rec1" >> w3.txt
+  707  git add .
+  708  git commit -m "f2cm3"
+  709  echo "rec1" >> w4.txt
+  710  git add .
+  711  git commit -m "f2cm4"
+  712  git log --oneline
+  713  git rebase master
+  714  git log --oneline
+  715  ls
+  716  git switch master
+  717  git log --oneline
+  718  ls
+  719  git merge feature2
+  720  git log --oneline
+  721  ls
+  722  git switch feature1
+  723  ls
+  724  git log --oneline
+  725  git rebase master
+  726  git log --oneline
+  727  ls
+  728  clear
+  729  ls
+  730  git status
+  731  git log --oneline
+  732  echo "rec1" >> s1.txt
+  733  git add .
+  734  git commit -m "f1cm1"
+  735  echo "rec1" >> s2.txt
+  736  git add .
+  737  git commit -m "f1cm2"
+  738  echo "rec1" >> s3.txt
+  739  git add .
+  740  git commit -m "f1cm3"
+  741  echo "rec1" >> s4.txt
+  742  git add .
+  743  git commit -m "f1cm4"
+  744  echo "rec1" >> s5.txt
+  745  git add .
+  746  git commit -m "f1cm5"
+  747  git log --oneline
+  748  git rebase master
+  749  git switch master
+  750  git log --oneline
+  751  git merge --squash feature1
+  752  git status
+  753  git commit -m "combined commits using squash"
+  754  git log --oneline
+  755  git show 24c9f45
+  756  ls
+  757  git log --oneline
+  758  clear
+  759  cd ..
+  760  pwd
+  761  ls
+
+
+
+
+
+
+
+						
+#########################
+Day - 15 | 4th Nov. 2026
+#########################
+
+	- Working with Remote Repositories :::
+	
+	- GitHub - Remote Git Repository
+	
+	
+	- Git Clone 		# To Copy/Clone the entire Remote Repository to the Local Machine
+	
+	- Git Add 			# To Add the changes from Working Directory to Staging Area 
+	
+	- Git Commit 		# To Commit the changes from Staging Area to Local Repository
+	
+	- Git Push 			# To Push the Changes from Local Repository to Remote Repository
+	
+	- Git Fetch/Pull::
+	
+			- Both Git Fetch and Git Pull are used to handle the Incremental changes from Remote Repositories
+			
+		- Git Fetch:
+			
+			- It used to just check for the incremental changes in the Remote Repository, if there is any Incremental Changes exist, it will update the details only in the Local Repository. Git fetch will NEVER update the Working Directory
+			
+		- Git Pull:
+			- It used to check for the incremental changes in the Remote Repository, if there is any Incremental Changes exist, it will update the details only in the Local Repository as well as in the Working Directory.
+				
+				git pull = Git Fetch + Git Merge
+				
+		As a best practise, it is always recommended to use git pull to keep the Local Repo in sync with Remote Repo.
+		
+		
+		
+	- Pull Request :::
+	
+		--> Developers create the Pull Request --> to Merge the changes from their feature branch to the target branch.
+		--> Pull Request should approved by the Reviewer
+		
+	
+	- Create Remote GitHub Repository
+	
+	- Create Remote Repository Branches 
+	
+		- Clone :::
+		
+			git clone <remote_repo_url>
+			
+			
+			git clone https://github.com/PL-DevOps-Cloud-0930/Remote_Test_Repo1.git
+			
+		- Push 	:: Expect the github Credentials
+		
+			git push -u origin <target_branch_name>
+			
+			
+			git push -u origin local_feature1	
+
+				Create the GitHub Personal Access Token (PAT)
+			
+		
+		- Fetch & Pull 
+		
+		- remote :::
+		
+			git remote -v 							# To get the list of remote repos linked to the local repo 
+			
+			git remote remove origin
+			
+			git remote add origin https://github.com/PL-DevOps-Cloud-0930/Remote_Test_Repo1.git
+			
+			
+		git rebase  (vs) git pull 
+		
+		Repo1:
+		
+			f1 
+			
+			f2 
+		
+
+
+
+
+
+
+  762  clear
+  763  mkdir remoterepos
+  764  ls
+  765  cd remoterepos/
+  766  clear
+  767  pwd
+  768  git clone https://github.com/PL-DevOps-Cloud-0930/Remote_Test_Repo1.git
+  769  ls
+  770  cd Remote_Test_Repo1/
+  771  clear
+  772  ls
+  773  ls -a
+  774  git status
+  775  git remote -v
+  776  git log --oneline
+  777  ls
+  778  git branch
+  779  git switch -c local_feature1
+  780  git branch
+  781  git log --oneline
+  782  git status
+  783  git status
+  784  ls
+  785  echo "rec1" >> local_feature1_file.txt
+  786  git add .
+  787  git commit -m "local_f1cm1"
+  788  git log --oneline
+  789  git status
+  790  git push -u origin local_feature1
+  791  git switch main
+  792  ls
+  793  git status
+  794  git fetch
+  795  ls
+  796  git statu
+  797  git status
+  798  git pull
+  799  ls
+  800  git status
+  801  git status
+  802  git pull
+  803  ls
+  804  git remote -v
+  805  git remote remove origin
+  806  git remote -v
+  807  git status
+  808  git remote add origin https://github.com/PL-DevOps-Cloud-0930/Remote_Test_Repo1.git
+  809  git remote -v
+  810  git remote add origin2 https://github.com/PL-DevOps-Cloud-0930/Remote_Test_Repo2.git
+  811  git remote -v
+  812  history
