@@ -1,0 +1,284 @@
+#########################
+Day - 16 | th Nov. 2026
+#########################
+
+	- Continuous Integration :::
+	
+		- It is the capability of any Application Development Team to Continuously Integrate the source code changes for further testing.		
+
+		Automate: 
+
+			- Build the Source Code
+				- Build is process of compiling the source code and create artifacts(Binaries: *.war.*.jar,*.exec,*.dll)
+			- Perform Unit Testing 
+			- Promote the Changes for further Testing Environments
+			- Notify the Testing Team through emails	
+			
+	
+	- Application Build :
+	
+		- Creation of Artifacts ??
+		
+		Application Program 		--> Written using High Level Langauage -> java/python 
+		
+		Tools :
+		
+			Build is process of compiling the source code and create artifacts(Binaries: *.war.*.jar,*.exec,*.dll)
+			
+			Java based Applications :::
+			
+				- Build Tools : javac/ant/gradle/maven 
+				
+				
+			Maven Build Tool:
+			
+			Java Maven Applications --> Desktop/Web Applications
+			
+			Project Workspace:
+			
+			Java_Maven_Web_Application_Project_Workspace --> Root Folder
+			
+			- src 
+				- main
+					*.java 
+					*.java 
+					*.java 
+				- test 
+					*.java 
+					*.java 
+					*.java 
+			- resources 
+				- *.html 
+				- *.js 
+				- *.css		
+			- application.properties 			
+			- db_credentials.json 			
+			- target/
+				*.war 
+				*.jar 				
+			- Maven_Libraries 			
+			- pom.xml 							==> for Maven 
+			
+
+
+	Understanding and Using Build Tools
+
+	Overview of Various Build Tools
+	What is Maven
+	Maven Architecture
+	Maven Plugins
+	Maven Archetypes
+	Maven Commands
+	Integration of Jacoco plugin for Code Coverage	
+
+	
+			Jenkins Module :::
+			
+			Python based Applications
+			
+		What is Application Build ?
+		
+				Build --> It is a process of Compiling the source code and create artifacts.
+				
+					Eg.: Java Program ==> High Level Language 
+							Code Compilation 
+							Create Artifacts --> Artifacts are the Binary Code(*.war/*.jar/*.exec)
+		
+
+				
+		Maven Build Tool :::
+		
+			- Is a Java Application Build Tool, used to compile the Java application source code, Perform Unit Testing, Create Artifacts. 
+			
+		
+			Java Program :::
+			
+			javac - java compiler 
+			
+			
+		Environment :
+		
+			Non-Prod Environments 
+			
+				Dev Environment:				
+					- Create Source Code 
+					
+				Build Environment:					Install --> jdk / Maven
+					- Build the Source Code 						--> plugin junit 
+					- Build Tools like Maven 						--> jacoco plugin 
+					- Unit Testing 									--> TestNG,Selenium	
+						
+				Test Environment :
+					QA Testing 
+					UAT Testing 
+					
+					
+	Dev Environment:	Local Developers' Machine
+		
+		Developers' Workflow ::
+
+			1. Create Program : *.java 
+			
+			2. Compile 
+			
+			3. Create artifacts 
+			
+			4. Test the program - Unit Testing using Unit Testing Tool like JUnit
+			
+			5. Push the Changes to Remote github repository 
+			
+			Tools required to perform these activities :::
+			
+			Tools :::
+			
+				- Eclipse based IDEs - like Eclipse for Java,Pycharm,Intellij, Visual Studio, Visual Studio Code
+				- Source Code Management Tool - like github/AWS Code Commit/Azure Repos 
+				- Jdk, Maven, JUnit Testing Tool, git  			
+
+
+
+			
+	Build Environment:
+
+		Using DevOps Approach ::
+		Automate ::
+
+		- Identify/Clone the Source Code from Github Repository 	
+		
+
+			
+			mvn clean package 
+
+		
+		- Build the code - Compile and create artifacts 					
+		- Unit Testing 			
+		- Verify the Unit Test Coverage 
+		- Archive the Artifacts in the Artifactory Library 
+		- Promote the Application to higher testing Environment(QA)					
+		- Notify the Testing/Development Team 	
+		
+		
+	
+	Version Control System :
+	
+		
+		Source Code 		*.java_v1.1  	---> GitHub 
+		Source Code 		*.java_v1.2  	---> GitHub 
+		Source Code 		*.java_v1.3  	---> GitHub 
+		Source Code 		*.java_v1.4  	---> GitHub 
+		
+		Artifacts			*.war_v1.1 		---> Artifactory Library(Jfrog/Az_Artifacts) --> Prod 
+		Artifacts			*.war_v1.2 		---> Artifactory Library(Jfrog/Az_Artifacts) --> Prod 
+		Artifacts			*.war_v1.3 		---> Artifactory Library(Jfrog/Az_Artifacts) --> Prod 
+		Artifacts			*.war_v1.4 		---> Artifactory Library(Jfrog/Az_Artifacts) --> Prod 		
+		
+		How to Perform Application Build, Unit Testing ?
+		
+			- Using Maven Build Tool 
+				- Maven is Java Application Build Tool
+				- Maven is used to Compile the Source Code 
+				- Create Artifacts 
+				- Perform Unit Testing
+					(Unit Testing is a process of testing the changes done by the developers)
+				- Maven can verify the Code Coverage 
+				
+		Application Build Process :
+		
+			Input 	: Source Code 	-	*.java  (github repositories)
+			
+			Output 	: Artifacts 	- 	*.war 	(Artifactory Libraries)
+
+
+			
+		Maven - Build Tool
+		
+		How Maven Works ??
+		
+		Application Source Code Repository :
+		
+			Developer create POM.XML File to perform Maven Build
+								
+		Build Tools - Maven - used to build Java applications 
+		
+		Using Maven : 
+			Application Build - Compile the code, create artifacts, perform unit-testing 
+
+				- Build  - It is a process of compiling the source code and create artifacts(Binaries - *.war / *.jar/ *.exec) 
+				- Unit Testing
+				
+		Maven Project :
+		
+			pom.xml - Project Object Model :
+			
+				- Will be part of the Java Application Project - Source Code Repository
+				- It is used to define the properties of application artifacts 
+				- It is used to define dependencies and the plugins required to perform build/unit-testing
+				
+				
+			Maven Repository :		https://mvnrepository.com/
+			
+				- Maven Repositories Contains the Maven Dependencies and Plugins 
+				- During Build, Maven refer to this Repositories and Download the Dependencies to perform Application Build, Unit Testing etc...
+				
+				Eg.: 
+				Build Environment (VM) :::
+
+					Build the application	--> Jdk, Maven 
+					
+					Unit Testing - Junit Testing Tool 
+
+<!-- Source: https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version>
+    <scope>test</scope>
+</dependency>
+
+
+<!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.52.0</version>
+    <scope>compile</scope>
+</dependency>
+
+
+<!-- Source: https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+<dependency>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.16</version>
+    <scope>compile</scope>
+</dependency>
+
+
+
+		- Maven Goals/Command/Instructions ::::
+		
+			● mvn compile 	- to compile the source code
+			● mvn test 		- to compile and execute junit test cases
+			● mvn package 	- to compile, test and create artifacts in the target folder of Project Library
+			● mvn clean 	- to clean the target folder.
+
+			Eg.: 
+			
+			mvn clean package 				
+			
+		Maven Project Structure :::			# Java Maven Desktop/Console/terminal Application;
+
+		MVN_Project1				# Project Name 
+			src 
+				main				# Maintain the source code *.java - Business Logic 
+					*.java
+				test				# Maintain the Test Cases and Test Data - JUnit 
+					*.java
+			target
+				artifacts *.war / *.jar
+				
+			pom.xml 			==> defines the application artifacts, plugins and all the required depedencies
+
+			JRE_Libraries
+			MVN_Libraries	
+			
