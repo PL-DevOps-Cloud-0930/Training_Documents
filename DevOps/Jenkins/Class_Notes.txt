@@ -1,0 +1,199 @@
+#########################
+Day - 17 | 6th Nov. 2026
+#########################
+
+	- Build Orchestration using Jenkins: 
+	
+	
+	-> CI/CD Process :
+	
+		Automate Application Builds and Deployments :::
+		
+	- Jenkins - Build Orchestration Tool :::
+	
+		- Is an open-source build orchestration Tool 
+		- Used to Create the end-to-end CICD Pipeline to automation application builds and deployments
+		- Used to perform any scheduled process automation 
+		
+	
+	
+	
+	- Jenkins Architecture :: CI & CD 
+	
+		- Jenkins is based on master/Controller & slave/Node
+		
+			- Jenkins Master/Controller (VM) :		
+								- Install Jenkins 
+								- To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes 
+		
+				- Jenkins Slave_Node (VM) (Build Server):	
+								- Install the Build Tools 
+								- To Execute the Jobs  
+
+	
+	
+	
+	Scenario 1: Application Build and Release Frequency is very less 
+	
+	
+		- Create Jenkins Master/Controller (VM) :
+				--> Install Jenkins 
+				--> Install all the required Build Tools 
+				--> Create Jenkins CI/CD Pipeline Projects & Execute the Build in same Jenkins_Master Node.	
+			
+			
+			
+			
+	Scenario 2: Multiple Application Build and Release Frequency is very high 	
+
+
+		- Jenkins Master/Controller (VM) :
+				--> Install Jenkins 
+				---> To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes 
+			
+		
+			- Jenkins Slave_Node/Build_Server1  (VM):	Perform Java Application Build 
+			- Jenkins Slave_Node/Build_Server1.1  (VM):	Perform Java Application Build 
+			- Jenkins Slave_Node/Build_Server2  (VM):	Perform .Net Application Build 
+			- Jenkins Slave_Node/Build_Server3  (VM):	Perform Python Application Build 
+			- Jenkins Slave_Node/Build_Server4  (VM):	Perform Node Application Build 
+			- Jenkins Slave_Node/Build_Server5  (VM):	Perform Angular Application Build 
+			
+			
+	- Jenkins Pipelines/Jobs/Projects Workflow :
+		
+				- Application Build 
+					==> Process of Compiling the Source Code, 
+						Create the Artifacts(Executable code - Binaries - *.war/*.jar/*.exec/*.dll) 
+				- Unit Test 
+				- Promote the Changes to Test Environments
+				- Notify the Testing Team thru Emails				
+			
+			
+			
+	CI/CD Workflow :::
+	
+		SCM_Checkout 
+		Application Build 
+		Unit Testing 
+		Create Artifacts
+		Promote the Application to Test Environments
+		Notify 
+		Deploy to Prod 			
+			
+			
+	Alternative to Jenkins :
+	
+		- GitHub-Actions 
+		- gitlab-ci 
+		- Bamboo
+		- Azure Pipelines 
+		- AWS Code Pipelines 			
+	
+	- Roles and Responsibilites :::
+	
+	- Developers' Perspective :::
+
+		- Developers are just the consumers of Jenkins using Jenkins Tools and Services.
+		- Developers use Jenkins to execute/cancel/view the output - workspace of the Jenkins projects/Pipelines/Jobs.
+		
+	- DevOps Perspective :::
+	
+		- DevOps Team is the owner of Jenkins Servers and Services 
+		
+		- Roles and Responsibilites of DevOps Team/Resources :::	
+		
+		- Jenkins Administrator ::::
+		
+			- Installation and Configuration of Jenkins 
+			- Jenkins Global System Configurations 
+			- Plugins Management
+			- Tools Management 
+			- User Management 
+			- Security Management 
+			- Credentials Management 
+			- Create Jenkins CICD Pipeline Projects
+			- Creation of Jenkins Master & Slave Nodes Configuration
+			- Create Jenkins CICD Pipeline Projects to automate Builds and Deployments
+			- Onboard the Applications to use Jenkins CICD Workflow process
+			- Periodic Upgrade of Jenkins Servic, Tools and the Plugins 
+			- Periodic Backup and Recovery
+			- Troubleshooting the Jenkins related issues. 
+			
+	
+	- Installation and Configuration of Jenkins ::::		
+		
+	Package Management :
+	
+		To Install Jenkins Package : 
+									# https://www.jenkins.io/doc/book/installing/
+									# https://www.jenkins.io/doc/book/installing/linux/
+									
+			- Service Package : Run in the specific port : 8080
+
+			Type: Jenkins is a service package - it runs in the default port: 8080.
+			
+		
+			1. Install Pre-Requisites					# JDK 
+			
+			2. Install Jenkins 							# Jenkins 
+			
+			3. Post Installation Activities				# Setup 
+			
+		
+	- Jenkins Master/Controller (VM) :		Tools: jdk, jenkins, git
+	
+					- To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes	
+	
+Install & Configure Jenkins Server :
+
+	- Refer to that tools/Service's Official Documentation.
+				https://www.jenkins.io/doc/book/installing/linux/
+				
+Launch AWS EC2 Instance - AMI - Ubuntu 24.04v 
+t2.micro - Instance Type 
+				
+#Allow All Traffic for Demo!
+
+Updated Inbound Rule - Port 8080 
+
+1. Install the pre-requisites :::
+
+# Install Jdk:
+
+sudo -i 			
+sudo apt update -y
+
+sudo apt install git -y 					# To install git if required
+git --version 
+
+sudo apt install openjdk-21-jre -y 			# previous version
+java -version						
+
+2. Install the Actual tool :::
+ 								
+#Install Jenkins:
+
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+  
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+  
+sudo apt update
+
+sudo apt install jenkins -y
+
+3. Perform Post_Installation Activities :::
+
+jenkins --version 
+
+systemctl status jenkins 
+
+# systemctl stop jenkins 
+# systemctl start jenkins 
+# systemctl restart jenkins 
+# systemctl enable jenkins 
+
+/var/lib/jenkins 		# Default Installation Dir of Jenkin on Linux Box
