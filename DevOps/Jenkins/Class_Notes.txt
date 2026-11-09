@@ -197,3 +197,109 @@ systemctl status jenkins
 # systemctl enable jenkins 
 
 /var/lib/jenkins 		# Default Installation Dir of Jenkin on Linux Box
+
+
+		
+#########################
+Day - 18 | 9th Nov. 2026
+#########################		
+		
+		- Jenkins Administrator ::::
+		
+			- Installation and Configuration of Jenkins 
+			
+			- Jenkins Global System Configurations 
+			- Plugins Management
+			- Tools Management 
+			- User Management 
+			- Security Management 
+			- Credentials Management 		
+		
+	- Installation and Configuration of Jenkins 	
+	
+		Open web browser :
+
+		http://<Public_IP_Address>:8080/	
+
+		
+		15.207.113.213:8080	
+		
+		- Unlock Jenkins 
+		
+		- Configure Default Plugins(Extensions) 
+		
+			- Choose Install Suggested Plugins option
+			
+		- Create First Admin User 
+	
+	
+	- Jenkins Global System Configurations :::
+			- Used to set up the default jenkins configuration/external server configs 
+	
+	- Plugins Management :::			
+		
+			- Used to install/uninstall/upgrade/enable/disable the plugins  
+			
+			- Publish Over SSH Plugins --> Install this. choose Restart.	
+	
+	- Tools Management :::	
+
+			- Used to identify the installation path & settings of the actual tools used in the Infra-Structure.
+			
+		Jenkins_Master (VM)		--> jdk,jenkins,git
+		
+			Jenkins_SlaveNode1 (VM) - maven build 
+			
+							--> jdk, maven, git 
+		
+		
+		
+		- Jenkins is based on master/Controller & slave/Node
+		
+			- Jenkins Master/Controller (VM) :		
+								- Install Jenkins  --> jdk, jenkins, git 
+								- Install required plugins --> maven plugin 
+								- To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes 
+		
+				- Jenkins Slave_Node (VM) (Build Server):	
+								- Install the Build Tools --> jdk, maven Tools
+								- To Execute the Jobs  
+		
+		
+		
+	- User Management :::
+	
+		- Used to enable the Users' Authentication
+		
+		- Used to administrate the Jenkins Users' profile 
+		
+			- developers who want to login 
+			
+				- user1 & user2 
+			
+	
+	- Security Management :::
+		
+		- Used to enable the Users' Authorization		
+	
+			
+			
+	- Credentials Management :::
+	
+		- To Setup Jenkins Credentials Manager 
+	
+	
+	
+Next ::
+
+	- Create Jenkins CICD Pipeline Project on Jenkins Master
+	- Creation of Jenkins Master & Slave Nodes Configuration
+	- Create Jenkins CICD Pipeline Projects to automate Builds and Deployments
+	- Onboard the Applications to use Jenkins CICD Workflow process
+	- Periodic Upgrade of Jenkins Servic, Tools and the Plugins 
+	- Periodic Backup and Recovery
+	- Troubleshooting the Jenkins related issues. 
+		
+	
+	
+	
