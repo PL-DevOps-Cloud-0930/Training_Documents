@@ -301,5 +301,145 @@ Next ::
 	- Troubleshooting the Jenkins related issues. 
 		
 	
+
 	
+	
+#########################
+Day - 19 | 10th Nov. 2026
+#########################	
+	
+	- Create Jenkins CICD Pipeline Project on Jenkins Master
+	
+	
+		Jenkins Projects :
+		
+			- Jenkins Free Style Projects	::: Based on the Manual Configurations 
+			
+			- Jenkins Pipeline Projects 	::: Based on the Automation Script
+												- Used to Onboard Applications to use DevOps CICD Process 
+												
+					
+		Variables/Parameters  :::			
+			
+			- Environment Variables :		
+			
+				- Jenkins pre-defined variables/keywords 
+				
+				
+				echo "Hello" 				# Print the constant value 
+
+				
+				echo "${var1}"				# Print the value of variable
+				
+				echo "jenkins-${JOB_NAME}-${BUILD_NUMBER}"
+			
+			
+			
+			- User Defined Varibles :		echo "User Defined Variables -${envi}"
+			
+			
+			- Jenkins Pipeline Projects 	::: Based on the Automation Script
+												- Used to Onboard Applications to use DevOps CICD Process 
+												
+												
+		
+			- Jenkins Pipeline are the collections of Stages 
+			
+				- Scripted Pipelines :::
+				
+				- Declarative Pipelines :::  yaml scripts key:value
+				
+					
+			
+			
+				Pipeline 
+					- Stage1 
+						- step1 		# Task  
+					- Stage2
+						- step1 		# Task  		
+					- Stage3
+						- step1 		# Task 			
+				
+			
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                echo 'Hello Everyone'
+            }
+        }
+        stage('Hello1') {
+            steps {
+                echo 'Hello'
+            }
+        }
+    }
+}			
+			
+			
+	CI/CD Workflow :::
+	
+		SCM_Checkout 
+		Application Build 
+		Unit Testing 
+		Create Artifacts
+		Promote the Application to Test Environments
+		Notify 
+		Deploy to Prod 				
+			
+			
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'		
+                echo 'Perform SCM Check out'					
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+            }
+        }
+        stage('Deploy to QA') {
+            steps {
+                echo 'Perform QA Deployment'
+            }
+        }
+        stage('Deploy to UAT') {
+            steps {
+                echo 'Perform UAT Deployment'
+            }
+        }
+        stage('Deploy to PROD') {
+            steps {
+                echo 'Perform PROD Deployment'
+            }
+        }
+    }
+}			
+			
+				
+	- Java Maven Web Application Project :::
+	
+		https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git
+		
+			
+Next :::
+		
+	- Creation of Jenkins Master & Slave Nodes Configuration ---> 
+	- Create Jenkins CICD Pipeline Projects to automate Builds and Deployments
+	- Onboard the Applications to use Jenkins CICD Workflow process
+	- Periodic Upgrade of Jenkins Servic, Tools and the Plugins 
+	- Periodic Backup and Recovery
+	- Troubleshooting the Jenkins related issues. 			
+			
+			
+			
+		
 	
