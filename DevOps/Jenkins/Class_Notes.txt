@@ -441,5 +441,123 @@ Next :::
 			
 			
 			
+#########################
+Day - 20 | 11th Nov. 2026
+#########################		
+
+		
+	- Creation of Jenkins Master & Slave Nodes Configuration			
+			
+			
+		- Jenkins Master/Controller (VM) :
+				--> Install Jenkins 
+				---> To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes 
+			
+		
+			- Jenkins Slave_Node/Build_Server1  (VM):	Perform Java Application Build 
+			- Jenkins Slave_Node/Build_Server1.1  (VM):	Perform Java Application Build 
+			- Jenkins Slave_Node/Build_Server2  (VM):	Perform .Net Application Build 
+			- Jenkins Slave_Node/Build_Server3  (VM):	Perform Python Application Build 
+			- Jenkins Slave_Node/Build_Server4  (VM):	Perform Node Application Build 
+			- Jenkins Slave_Node/Build_Server5  (VM):	Perform Angular Application Build 	
+
+
+	- Remote Server Management ::::
+	
+	
+		Purpose of the Servers :
+		
+			Jenkins Master/Controller (VM)				
+					# To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes			
+			
+			Jenkins Slave_Node/Build_Server1  (VM)		
+					# Perform Java Maven Application Build 
+					# Tasks:
+						SCM_Checkout 
+						Application Build 
+						Unit Testing 
+						Create Artifacts
+						Promote the Application to Test Environments
+						Notify 			
+	
+		List of Server ::::
+		
+			
+			Jenkins Master/Controller (VM)
+			Jenkins Slave_Node/Build_Server1  (VM)
+			
+			
+		Tools to be Installed ::::
+
+		
+			Jenkins Master/Controller (VM)			-->	Install git, jdk, jenkins  	
+			
+			Jenkins Slave_Node/Build_Server1  (VM)	--> Install git, jdk, maven 	
+
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+            }
+        }
+        stage('Deploy to Target Server') {
+            steps {
+                echo 'Perform QA Deployment'
+            }
+        }
+    }
+}			
+
+Eg.:::
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'
+				
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'
+				
+				git branch: 'feature1', url: 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'
+				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+            }
+        }
+        stage('Deploy to Target Server') {
+            steps {
+                echo 'Perform QA Deployment'
+            }
+        }
+    }
+}			
+			
+			
+			
+			
+
+Next ::
+
+	- Create Jenkins CICD Pipeline Projects to automate Builds and Deployments
+	- Onboard the Applications to use Jenkins CICD Workflow process
+	- Periodic Upgrade of Jenkins Servic, Tools and the Plugins 
+	- Periodic Backup and Recovery
+	- Troubleshooting the Jenkins related issues. 				
 		
 	
