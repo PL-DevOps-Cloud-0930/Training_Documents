@@ -560,4 +560,213 @@ Next ::
 	- Periodic Backup and Recovery
 	- Troubleshooting the Jenkins related issues. 				
 		
+
+
+			
+			
+#########################
+Day - 20 | 11th Nov. 2026
+#########################				
 	
+	-> jdk pre-requisites for Jenkins 	==> openjdk21 (Master) & (Slave Nodes)
+	
+	-> Slave Node Credentials 			==>	Host_ID,User_ID,Private key, Host Key Verification
+											--> authorized_keys
+
+
+
+pipeline {
+    agent { label 'slave1' }
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Deploy to Target Server') {
+            steps {
+                echo 'Perform QA Deployment'
+            }
+        }
+    }
+}
+
+
+	- To Perform Maven Application Build :
+	
+		- pom.xml 
+		
+		- maven goals 
+		
+			- mvn clean package 
+
+
+
+	- Setup the Tomcat Server ::::
+	
+	
+	
+	Non-Prod 
+	
+		Dev 
+		
+		Build 						==> Created Artifacts 
+		
+		Test(QA & UAT)		==> 		Prod 			# Target Server 
+		
+	
+	
+	
+		List of Server ::::
+		
+			
+			Jenkins Master/Controller (VM)
+			
+				Jenkins Slave_Node/Build_Server1  (VM)
+				
+			Tomcat_Server (VM) 								# To execute the Java Application Artifacts
+			
+			
+			
+			
+		Tools to be Installed ::::
+
+		
+			Jenkins Master/Controller (VM)				-->	Install git, jdk, jenkins  	
+			
+				Jenkins Slave_Node/Build_Server1  (VM)	--> Install git, jdk, maven 		# *.war
+	
+	
+			Tomcat_Server (VM) 	QA						-->	Install jdk, Tomcat Web Application Server
+															Enable Port 8080
+	
+			Tomcat_Server (VM) 	UAT						-->	Install jdk, Tomcat Web Application Server
+															Enable Port 8080
+
+			Tomcat_Server (VM) 	PROD					-->	Install jdk, Tomcat Web Application Server
+															Enable Port 8080
+
+															
+		- Tomcat is the Web Application Server Used to Execute Java Application Artifacts 	
+		
+		*.war file ???
+		
+		
+		Sevice Package :
+		
+		Install Pre-requisites	
+		Install Actual Tool
+		Post Installation Actions				
+
+			Eg.: Tomcat :::: 
+			
+				Install Pre-requisites			===> jdk 
+				
+				Install Actual Tool				===> Install Tomcat (port : 8080)
+				
+				Post Installation Actions		===> Started Tomcat 
+		
+		
+		
+		
+		
+			Jenkins Master/Controller (VM)				-->	Install git, jdk, jenkins  	
+			
+				Jenkins Slave_Node/Build_Server1  (VM)	--> Install git, jdk, maven 				# *.war
+	
+	
+			Tomcat_Server (VM) 	QA						-->	Install jdk, Tomcat Web Application Server
+															Enable Port 8080
+																# *.war
+		
+
+
+	Deployment ::::		Process of Copying the artifacts from one server to another.
+	
+	
+		Source_Server													Target_Server 
+		
+			Jenkins_Slave_Node 												Tomcat_Server 
+			
+				Source_path														Target_Path
+					
+					target/*.war				=======>							/opt/tomcat/webapps
+						
+																						/opt/tomcat/webapps/*.war				
+	
+	
+		- Maven Goals/Command/Instructions ::::
+		
+			● mvn compile 	- to compile the source code
+			● mvn test 		- to compile and execute junit test cases
+			● mvn package 	- to compile, test and create artifacts in the target folder of Project Library
+			● mvn clean 	- to clean the target folder.
+
+			Eg.: 
+			
+			mvn clean package 			
+	
+pipeline {
+    agent { label 'slave1'}
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Deploy to QA_Target Server') {
+            steps {
+                script{
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'QA_Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+            }
+        }
+    }
+}	
+	
+		
+		
+		
+sshPublisher(publishers: [sshPublisherDesc(configName: 'QA_Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])		
+		
+		
+		
+		
+Next :::
+
+	- Build Triggers 
+		
+		-- Automate Build 
+
+	- Email Notifications 
+	
+	- Jenkins Projects 
+		
+		
+		
