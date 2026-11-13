@@ -562,10 +562,10 @@ Next ::
 		
 
 
-			
+					
 			
 #########################
-Day - 20 | 11th Nov. 2026
+Day - 21 | 12th Nov. 2026
 #########################				
 	
 	-> jdk pre-requisites for Jenkins 	==> openjdk21 (Master) & (Slave Nodes)
@@ -767,6 +767,307 @@ Next :::
 	- Email Notifications 
 	
 	- Jenkins Projects 
+		
+		
+		
+#########################
+Day - 22 | 13th Nov. 2026
+#########################			
+
+
+	- Build Triggers 
+		
+		-- Automate Build 
+
+	- Jenkins Build Triggers :::	
+	
+
+		- Build Periodic :::			https://crontab.guru/
+			
+			- Used to trigger the jenkins jobs irrespective of code change. - It is not meant for CI/CD.
+			- To perform any process automation
+			- The build is scheduled based on the crontab 
+			
+			
+			Non-Prod 							Prod 		24/7
+			
+				Dev 							Prod_Servers
+				Build 
+				QA 
+				UAT 
+					
+					8AM - 10PM 
+					
+					
+				- Jenkins_Start_Jobs	--> Start the Servers 
+											Scheduled for 7:45AM
+											
+				- Jenkins_Stop_Jobs		--> Stop the Servers 
+										-->	Scheduled for 10:15PM			
+				
+			
+			
+		- GitHub Webhook :::    meant for CI/CD
+		
+			- Used to trigger the jenkins Job whenever there is any commit happened in the remote repository
+			- github webhook has be configured in the remote repository by using the jenkins URL
+			
+			Payload URL *	==> jenkins URL 		==> http://15.252.70.197:8080/github-webhook/
+
+
+			
+		
+		
+		
+		- PollSCM :::
+
+			- It is used to trigger the build based on the crontab, only if there is any changes happened in the source-code repository.
+			
+			
+		
+			-  Test Cycle :::	
+			
+				Testing Team -- QA :::
+				
+					8AM 	--> Schedule 		
+					--
+					-
+					-
+					-
+					-
+					-
+					12PM 	--> Schedule
+					
+					
+					3PM	
+			
+			
+			
+	- Jenkins Email Notifications ::::
+
+
+
+
+Email Notifications can be sent during:
+
+- successful
+- failure 
+- abort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	- GMail Account :
+	
+		- Two Way Authentication on GMail Account
+
+
+Before Creating the EMail Scripts:
+Configure Email Server:
+
+To Setup the Email Notifications, First we need to set the Email Server in the Jenkins System configuration :
+
+
+
+
+Login to Gmail :::
+
+Click Manage Account Settings
+
+@Left side panel - select Security 
+
+MFA/Two-Way Authentication --> mobile#
+
+Search for App password in the same page
+
+Name:
+Mail
+
+What ? window
+Which Appln - email	
+
+App Password = 16 bytes of App Password. vaufxwhdbtnlltzr vauf xwhd btnl ltzr
+
+
+
+How to setup the Email Server in the Jenkins Config:
+
+goto manage jenkins -> system configuration 
+
+goto Email Notification 
+		
+SMTP Server : smtp.gmail.com	
+
+SMTP Authentication
+	User Name: Enter Email ID 
+	Password : 16 bytes of App Token (Created in Gmail)
+	
+Choose SSL :
+
+SMTP Port :: 465
+	
+
+Email Notifications can be sent during:
+
+- successful
+- failure 
+- abort
+	
+pipeline {
+    agent { label 'slave1'}
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+            post {
+                failure {
+                  sh "echo 'Send mail on failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'SCM-Checkout Failed - "Job '${JOB_NAME}' (${BUILD_NUMBER})"', to: 's1.gmail.com'
+                }
+              }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+				sh 'mvn clean package'
+            }
+            post {
+                failure {
+                  sh "echo 'Send mail on failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'App Build Failed - "Job '${JOB_NAME}' (${BUILD_NUMBER})"', to: 's1.gmail.com'
+                }
+              }
+        }
+        stage('Deploy to QA_Target Server') {
+            steps {
+                script{
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'QA_Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+            }
+            post {
+                Success {
+                  sh "echo 'Send mail on Success-deployment'"						
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Successful', to: 's1.gmail.com'
+                }
+                Failure {
+                  sh "echo 'Send mail on deployment Failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Failed', to: 's1.gmail.com'
+                }
+                abort {
+                  sh "echo 'Send mail on deployment Aborted'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Aborted', to: 's1.gmail.com'
+                }		
+              }
+        }
+    }
+}	
+
+	
+pipeline {
+    agent { label 'slave1' }
+    
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    } 
+    
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout for Java Application'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'
+            }
+            post {
+                failure {
+                  sh "echo 'Send mail on failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'SCM-Checkout Failed - "Job '${JOB_NAME}' (${BUILD_NUMBER})"', to: 's1.gmail.com'
+                }
+              }	
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Java Application Build'
+				sh 'mvn clean package'
+            }
+            post {
+                failure {
+                  sh "echo 'Send mail on failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'App Build Failed - "Job '${JOB_NAME}' (${BUILD_NUMBER})"', to: 's1.gmail.com'
+                }
+              }
+        }
+        stage('Deploy to QA Server') {
+            steps {
+              script{
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server_QA', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			  }
+            }
+            post {
+                Success {
+                  sh "echo 'Send mail on Success-deployment'"						
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Successful', to: 's1.gmail.com'
+                }
+                Failure {
+                  sh "echo 'Send mail on deployment Failure'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Failed', to: 's1.gmail.com'
+                }
+                abort {
+                  sh "echo 'Send mail on deployment Aborted'"					
+					mail bcc: 's1.gmail.com', body: '"Jenkins Jobs Status ${BUILD_URL}"', cc: 's1.gmail.com', from: '', replyTo: '', subject: 'Deployment Aborted', to: 's1.gmail.com'
+                }		
+              }
+        }
+    }
+}
+
+
+	- Periodic Upgrade of Jenkins Service, Tools and the Plugins 	:::	
+	
+		- Review once in 3 months and Upgrade 
+		
+		
+	
+	- Periodic Backup and Recovery
+	
+	
+		- BackUp Details ---> /var/lib/jenkins/*
+		
+		- Storage Admin Team 
+		
+			--> Backup and Recovery Policies 
+			
+			--> Upgrade of Jenkins Service, Tools and the Plugins
+			
+			
+	
+	- Troubleshooting the Jenkins related issues: 	
+
+		--> Issues related to Jenkins Servers -> Jenkins Master / Slave Nodes 
+		
+		--> Issues related to Pipeline Project Configurations 
+		
+		
+		
 		
 		
 		
