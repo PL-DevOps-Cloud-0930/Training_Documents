@@ -1,0 +1,170 @@
+		
+#########################
+Day - 23 | 16th Nov. 2026
+#########################
+	
+	Containerization using Docker :::
+	
+	- What is Containerization ?
+	
+		- Containerization is a process of packaging the Applications along with its dependencies.
+		
+	- DevOps --> Continuous Deployment can be achieved only with Micro-Service Based Application Architecture.
+	
+	- All Micro-Services are actually packaged(Containerized) for Deployment.
+	
+	- Only the Containerized Application Services are Deployed using Kubernetes(Container Orchestration Tool)
+	
+	
+	How to Containerize the Application Services ?
+	
+		- We use the Container Services like Docker.
+		
+		- Managed Container Services like ECS/ACS/GCE
+		
+
+	- Architecture of Container Services :::
+	
+		VM (vs) Container
+	
+	
+	- Virtual Machines ::::	
+	
+		- VMs are called as Hardware Level Virtualization
+		- VMs are Created using Hypervisor
+		- VMs are actually used to execute the Operating System, NOT Application/Task by default
+		- VMs will continue to run even if there is no Active Application/Task
+		- VMs consume more space and time to start the Application/Task
+	
+	- Containers ::::
+	
+		- Containers are called as OS Level Virtualization
+		- Containers are created using Container Engine
+		- Containers are actually used to run the Application/Task. NOT the Operating System
+		- Containers will immediate goes to stop/exit state if there is NO Active Application/Task
+		- Containers consume less space and time to start the Application/Task	
+		
+		- Container are used to reduce the no. of Virtual Machines. We cannot completely eliminate VMs.
+		
+		- Every Container run in its own dedicated & Isolated Address Space.
+		
+		- The Scope for the Application/Task is limited to that specific Container by default.
+		
+		
+		Properties of Operating System:
+		
+			Name Space 	& Control Group are the two properties of the base Operating System(Kernel) that are used by the Container Engine to create and manage the Container 
+		
+		
+		
+	- Terminologies ::::
+
+	
+		- Containerization 		#	It is a process of packaging the applications along with its dependencies.
+		
+		- Container-Engine		# 	It is used to Create and Manage the Containers and Container Images.
+									Docker Container Engine 
+		
+		- Container Images 		# 	It is a static file, defines the properties and depedencies of the Application/Container.
+									It is Non-Executable
+									It composed of various layer of Instructions created using Dockerfile.
+									
+		- Containers 			# 	Executable entity of the Container-Image
+
+		- Container Registry	# 	It is used to Store and Manage the versions of Container-Images 
+									Eg.: DockerHub 
+									https://hub.docker.com/
+									
+		- Container Repository	#	It is a subset of Container Registry
+		
+		
+		GitHub Repo.								Artifactory Libraries				DockerHub
+													(Jfrog)
+													
+			Source_Code:							Application Artifact				Application Image
+			
+			web_app.java_v1.0		--> Build --> 	web_app.war_v1.0			-->		web_app_Image:v1.0	==> Container1
+		
+			web_app.java_v1.1		--> Build --> 	web_app.war_v1.1			-->		web_app_Image:v1.1		
+			
+		
+		
+	Working with Containers ::::
+	
+	
+	- Infra-Structure Perspective :::
+	
+		- Containers are used to reduce the no. of Virtual Machines. Safe the Infra-Structure Cost.
+		
+		Without Containers :::
+
+			- Jenkins Master/Controller (VM) :
+					--> Install Jenkins 
+					---> To Create Jenkins Jobs/Projects/Pipelines and scheduled to run on the Jenkins Slave Nodes 
+			
+				- Jenkins Slave_Node/Build_Server1  (VM):	Perform Java Application Build 
+				- Jenkins Slave_Node/Build_Server1.1  (VM):	Perform Java Application Build 
+				- Jenkins Slave_Node/Build_Server2  (VM):	Perform .Net Application Build 
+				- Jenkins Slave_Node/Build_Server3  (VM):	Perform Python Application Build 
+				- Jenkins Slave_Node/Build_Server4  (VM):	Perform Node Application Build 
+				- Jenkins Slave_Node/Build_Server5  (VM):	Perform Angular Application Build 		
+		
+
+		With Containers :::
+			- Jenkins Master/Controller (VM) :		
+
+				- Jenkins Slave_Node/Build_Server  (VM)
+					- Install Container-Engine
+							C1 		Perform Java Application Build
+							C2      Perform Java Application Build 
+							C3      Perform .Net Application Build 
+							C4      Perform Python Application Build 
+							C5      Perform Node Application Build 
+							C6      Perform Angular Application Build 
+	
+	
+	- Development/Deployment Perspective :::
+	
+		- Containerization is a process of packaging the Applications along with its dependencies.
+	
+		- Developer ::
+		
+			- Create Source Code 	--> (jdk17,tomcat8.0)
+			
+			- Build 
+			
+			- Create Artifacts --->		my_web_appservice1.war_v1.0
+			
+				Use Docker Container Engine to Create the Container Images
+				
+				
+				Create the Application Package/Image (my_web_appservice1.war_v1.0,jdk17,tomcat8.0) ==> my_web_appservice1_Img:V1.0
+				
+				Publish the Application Service Image my_web_appservice1_Img:V1.0 to the Container Registry (DockerHub)
+				
+				
+			
+			- Deploy the Artifacts to the Target Servers 
+			
+			
+			
+		- QA (VM)		
+			- Install Container-Engine, Download/Pull the my_web_appservice1_Img:V1.0 from DockerHub & Create Container out of it to execute the Application Service.
+			
+			
+		- UAT (VM)
+			- Install Container-Engine, Download/Pull the my_web_appservice1_Img:V1.0 from DockerHub & Create Container out of it to execute the Application Service.
+			
+		
+		- PROD (VM)			
+			- Install Container-Engine, Download/Pull the my_web_appservice1_Img:V1.0 from DockerHub & Create Container out of it to execute the Application Service.
+		
+		
+		
+Next ::
+
+	- Work with DockerHub 
+	
+	- Install Docker Container Engine.
+	
+	
