@@ -167,4 +167,126 @@ Next ::
 	
 	- Install Docker Container Engine.
 	
+
+
+#########################
+Day - 24 | 17th Nov. 2026
+#########################
+		
+	
+	- DockerHub 
+
+		- Create DockerHub Account
+			- Login & Explore DockerHub Dashboard.	
+
+			
+	- Docker Container Engine ::
+	
+		- Install Docker Container-Engine on a VM(Use Jenkins_SlaveNode1)
+		
+				# https://docs.docker.com/engine/install/ubuntu/
+				
+				
+		- sudo -i 
+		- apt install docker.io -y 				# To Install Docker.
+
+		- Container-Engine		# 	It is used to Create and Manage the Containers and Container Images.
+									Docker Container Engine 
+		
+		
+	
+	- Docker Cli Commands 		# To interact with Docker Container Engine.
+	
+	
+		docker --version 					# Get the version
+		
+		docker images						# To get the list of Docker Container Images 
+		
+		docker ps 							# To get the list of Active Docker Container 
+		
+		docker ps -a 						# To get the list of Active & Inactive Docker Container 
+		
+		
+		docker pull <Container_Image_Name>	# To Download the Container-Image from the DockerHub Registry
+
+			Eg.: 
+			
+				docker pull ubuntu 			# To Download the latest version of Ubuntu Image from the DockerHub Registry
+						
+		
+		docker pull <Container_Image_Name:tag_id>	# To Download the specific version of Container-Image from the DockerHub Registry
+		
+
+			Eg.: 
+			
+				docker pull ubuntu:stonking-20261105.1
+				
+		AMI ==> Create EC2 Instances (VM)
+		
+		Docker Container_Image ==> Create Docker Container 
+		
+		
+		Create Docker Container ::
+		
+		
+		docker run <Container_Image_Name>	# To Create and Execute the Container.
+		
+		
+		docker run <Container_Image_Name:tag_id>
+		
+			Eg.: 
+			
+				docker run ubuntu	
+		
+	
+	Modes of Container Executions:
+	
+		- Foreground/Attached Mode :::				# Default 
+			
+			Eg.:
+			
+				docker run ubuntu sleep 15	
+		
+		- Background/Detached Mode :::
+
+			Eg.:
+			
+				docker run -d ubuntu sleep 15	
+	
+	
+		- Interactive Mode :::
+	
+			Eg.:
+			
+				docker run -it ubuntu bash	
+
+
+				exit 								# Exit the Container.
+	
+	
+	- docker start <container_id>			# To Start the Container 
+	
+		Eg.: 
+		
+			docker start 55590ede1dc7
+	
+	
+	- docker exec -it <container_id> bash 	# Login to the running Container 
+	
+		exit 								# Logoff from the Container
+
+
+		Eg.: 
+		
+			docker exec -it 55590ede1dc7 bash
+			
+			exit 
+		
+		
+		
+	- docker stop <container_id>			# To Stop the Container 
+	
+		Eg.: 
+		
+			docker Stop 55590ede1dc7	
 	
