@@ -290,3 +290,109 @@ Day - 24 | 17th Nov. 2026
 		
 			docker Stop 55590ede1dc7	
 	
+
+
+	
+	
+	
+#########################
+Day - 25 | 18th Nov. 2026
+#########################
+
+	- Docker Cli commands :::
+	
+	
+	
+	- Remove the Container :::
+	
+		- docker rm <Container_ID>
+		
+		
+	
+	- Remove the Container Images
+	
+		- docker rmi <Container-Image_ID>	
+		
+		
+	
+	- Docker Networking using Port Mapping ::::
+	
+		- Port Mapping/Binding :
+		
+			- To Map or bind the Container port with the host Port 
+			- To Expose the Containers to Internet. 
+
+
+			Syntax: 
+			
+				-p <host_port>:<container_port>
+
+		- docker run -it tomcat:8.0 bash
+		
+		
+		- docker run -it -p 8089:8080 tomcat:8.0
+		
+		- docker run -d -p 8080:8080 tomcat:8.0
+		
+		
+		--> <Host_Ip>:<Host_Port>					# To access the Tomcat service running inside the Container
+
+	
+	- Docker Volume ::::
+	
+	
+		- Storage --> Maintain any files -> Input file / output file
+		
+		
+		-  3 - Tier Application: -- Micro-Service --> User Login/Sign-in Page 
+		
+			- Front-End Layer 		=> User Interface 	==> C1 
+			
+			- Application Layer 	=> Business Logic 	==>	C2 
+			
+			- Back-End Layer		=> Database			==>	C3 
+			
+			
+			
+		- Stateless Applications 
+		
+		- Stateful Application
+		
+		
+		- Persistant Volumes to maintain the application data even after the life time of the Container.
+		
+		
+		
+		- docker volume list 		# Used to get the list of Docker Volumes 
+		
+		- docker volume create pl_vol1
+		
+		- docker inspect pl_vol1
+		
+		- docker run -it ubuntu bash
+		
+		- docker run -it --mount source=pl_vol1,destination=/pl_vol1 ubuntu bash --name=front-end		
+	
+		- docker run -it --mount source=pl_vol1,destination=/pl_vol1 ubuntu bash --name=Appln	
+
+
+Next :::
+
+	- Docker Image Creation 
+	
+		- Docker Commit 
+		
+		- Docker Build 
+		
+	- Publish Image to Container Registry
+	
+	- Container Orchestration using Docker Compose 
+	
+		- Overview of Docker Swarm 
+		
+		- Kubernetes
+	
+	- Integration Docker with Jenkins Pipelines 
+	
+	
+	Next Module : Container Orchestration using Kubernetes
