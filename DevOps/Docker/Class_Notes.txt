@@ -396,3 +396,151 @@ Next :::
 	
 	
 	Next Module : Container Orchestration using Kubernetes
+
+
+
+	
+#########################
+Day - 26 | 19th Nov. 2026
+#########################	
+	
+	
+	- Docker Image Creation 
+	
+		- Docker Commit :::
+				
+				- It is used to Create a Container Image based on the existing Container reference.
+				- Used by the Infra-Structure Management Team
+			
+			Syntax :::
+				
+				docker commit <Container_ID> <dockerhub_repository_name>/<New_Image_Name>:<tag>
+				
+				docker commit <Container_ID> <New_Image_Name>:latest
+				
+				
+								
+			Eg.: 	
+			
+				docker commit 55590ede1dc7 loksaieta/pl_gitmvnimg:v1
+
+	
+		- Docker Build :::
+	
+				- It is used to Create a Container Image from the scratch based on the Dockerfile Instructions
+				- Used by the Developers to Containerize the Applications
+		
+		
+		vi Dockerfile 
+		
+		FROM ubuntu
+		RUN apt update -y 
+		RUN apt install git -y
+		RUN apt install maven -y
+		
+		
+		Syntax: 
+		
+			docker build -t <dockerhub_repository_name>/<New_Image_Name>:<tag> .		# '.' refers to Dockerfile reference.	
+
+		Eg.: 
+		
+			docker build -t loksaieta/pl_webappimg:v1 .
+			
+			
+			docker build -t MLProj/pl_webappimg:v1 .
+			
+		
+	- Publish Image to Container Registry :::	
+	
+	
+	
+		--> Login to DockerHub using Docker CLI Command 
+		
+			- DockerHub Login ID & Password				# To Login thru web browser
+			
+			- DockerHub Login ID & PAT 					# To Login thru docker cli 
+			
+			
+		--> Create DockerHub Access Token.
+			
+				1. Run
+
+					docker login -u loksaieta				# Login ID 
+				
+				2. At the password prompt, enter the personal access token.
+
+					asdfasdfasdfasdfasdfasdfasdfasdfasdfsdafasdfsadfsadf	# PAT
+
+		
+			
+		- docker push <dockerhub_repository_name>/<New_Image_Name>:<tag>
+		
+			Eg.: 
+			
+				docker push loksaieta/pl_javamvnbuildimg:v1
+				
+				
+				docker push loksaieta/pl_javamvnbuildimg:v1
+			
+			
+			
+		DockerHub 
+		
+		Azure Container Registry 
+		
+		Elastic Container Registry 
+		
+		Google Container Registy 
+		
+
+		vi Dockerfile 				------> 		pom.xml (create artifact)
+		
+		FROM ubuntu 
+		RUN apt update -y 
+		RUN apt install git -y
+		RUN apt install maven -y
+		CMD asdf
+		CMD adfasd
+		CMD asdfasdf
+		
+		
+		Dockerfile Instructions ::::		
+		
+			FROM 									# To Identify the Base Image
+			RUN 									# To run the package manager
+			COPY 									# To Copy the file from host volume to container volume
+			CP 										# To Copy the file within the container volumes 
+			ADD 									# To Copy the file from Host Volume as well as from URL
+			ENV 									# To define the Environment Variable 
+			ARG 									# To pass Arguements to the Steps in Dockerfile 
+			EXPOSE									# To Define the Container Port 
+			WORKDIR									# To set the current working directory within the Container 
+			CMD										# To set the default start-up command to the container 
+													  This Command can be changed at run-time.
+			ENTRYPOINT								# To set the default start-up command to the container 
+													  This Command cannot be changed at run-time.	 
+			
+		
+		
+
+	- Container Orchestration using Docker Compose 
+	
+		- Overview of Docker Swarm 
+		
+		- Kubernetes
+	
+	- Integration Docker with Jenkins Pipelines 
+	
+	
+	Next Module : Container Orchestration using Kubernetes
+					
+			
+
+	
+	
+	
+	
+	
+	
+	
