@@ -535,7 +535,246 @@ Day - 26 | 19th Nov. 2026
 	
 	Next Module : Container Orchestration using Kubernetes
 					
+
+
+#########################
+Day - 27 | 20th Nov. 2026
+#########################	
+
+
+	vi Dockerfile ::				# To package the Application Artifacts with its dependencies
+	
+	
+	FROM tomcat:8.0
+	COPY target/*.war /usr/local/tomcat/webapps
+	EXPOSE 8080
+
+
+
+	docker run -it -p 8089:8085 loksaieta/mywebapp:v1.0
+	
+	
+	Jenkins --> Automate the Application Build, Application Image creation & Publish & Deployment 
+
+
+	--> Related Container Orchestration ::::
+	
+	
+	
+	- Container Orchestration using Docker Compose 
+
+		- Docker Compose ::: Used to execute Multiple Containers as a service.
+
+	- Docker Compose 
+	
+		- Is an extension/Plugin to Docker Engine.
+		- Is used to run multiple containers as a Service!
+		- Docker Compose uses the Yaml file to create the Service definitions
+		
+			Any Container that is part of a Service :
+		
+				should be in-sync with other container within the service 
+				
+				
+				Start/Stop all these container at the same time.
+		
+		
+	
+		- Overview of Docker Swarm 
+		
+		
+		
+	-  3 - Tier Application: -- Micro-Service --> User Login/Sign-in Page 
+	
+	
+	
+		- Front-End Layer 		=> User Interface 	==> C1 
+		
+		- Application Layer 	=> Business Logic 	==>	C2 
+		
+		- Back-End Layer		=> Database			==>	C3 
+		
+		
+	- Docker Swarm --> Used to Create Replicas of Container 
 			
+
+		replica = 3 
+	
+		- Front-End Layer 		=> User Interface 	==> C1 --> c1.1,c1.2,c1.3
+		
+		- Application Layer 	=> Business Logic 	==>	C2 --> c2.1,c2.2,c2.3
+		
+		- Back-End Layer		=> Database			==>	C3 --> c3.1,c3.2,c3.3
+
+
+
+Container Orchestration Tools :
+
+	- Docker Swarm ::::
+	
+		- Docker Swarm is one the Container Orchestration Tools.
+		- It is meant only for Docker Containers.
+		- Used to Ensure High Availability of Containers by creating Replicas of Containers.
+		
+		- We cannot do Auto-Scaling or Load Balancing!		
+		
+	
+	
+	- Kubernetes :::::
+	
+	
+		-> Docker Swarm based features(Replicas) 
+		-> Docker Compse based features(Executing Containers as Service)
+		
+			- It is an Open-Source Container Orchestration Tool 
+			- Kubernetes is used to Deploy any type of Containers.
+			- It is used to ensure high availability of the Applications/services running thru Containers.
+			- Used to Ensure High Availability of Containers by creating Replicas of Containers/Pods.
+			- It supports Auto-Scaling & Load Balancing.	
+			- Supports self-healing.
+			
+			- Used to deploy the Micro-Service Based Applications 
+
+
+	- Integration Docker with Jenkins Pipelines :::::
+	
+	
+	
+pipeline {
+    agent { label 'slave1'}
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Build Application Image') {
+            steps {
+					echo 'Application Image Build'
+            }
+        }
+        stage('Publish Application Image to Container Registry') {
+            steps {
+					echo 'Publish Image'
+            }
+        }
+		
+        stage('Deploy to Kubernetes') {
+            steps {
+					echo 'Deploy to Kubernetes'
+            }
+        }
+    }
+}	
+		
+	
+	Servers ::
+	
+		Jenkins_Master 						- Create Jenkins CICD Pipeline 
+			Jenkins_SlaveNode1				- Create Application Architects & Application Image & Publish to Container Registry
+	
+	
+	
+	Tools ::
+	
+				Jenkins_Master 								- git,jdk,jenkins 
+					Jenkins_SlaveNode1(Build Server)		- git,jdk,maven,docker
+					
+	
+	Integration ::		
+	
+			- Using Jenkins-Slave Integration using Node Configuration 
+			- Integrate DockerHub with Jenkins Master 
+			
+			
+	Credential Management ::
+	
+			- Create the DockerHUB PAT and update in the Jenkins Credential Manager
+			
+			
+			
+			
+	Ensure the devopsadmin userid in Build Server have access to Docker Service:
+		
+			- usermod -aG docker devopsadmin		
+			
+			
+			
+			
+			
+	Create the Jenkins Pipelines :::
+			
+		pipeline {
+			agent { label 'slave1'}
+
+			environment {
+				JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+				PATH = "${JAVA_HOME}/bin:${env.PATH}"
+			}
+			
+			stages {
+				stage('SCM_Checkout') {
+					steps {
+						echo 'Perform SCM Check out'
+						git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+					}
+				}
+				
+				stage('Application Build') {
+					steps {
+						echo 'Perform Application Build'
+						sh 'mvn clean package'
+					}
+				}
+				
+				stage('Build Application Image') {
+					steps {
+							echo 'Application Image Build'
+					}
+				}
+				
+				stage('Login to DockerHub') {
+					steps {
+							echo 'Login to DockerHub'
+					}
+				}				
+				
+				stage('Publish Application Image to Container Registry') {
+					steps {
+							echo 'Publish Image'
+					}
+				}
+			}
+		}	
+			
+	
+	docker build -t <dockerhub_repository_name>/<New_Image_Name>:<tag> .
+	
+	docker login 
+	
+	docker push <dockerhub_repository_name>/<New_Image_Name>:<tag>
+	
+	
+
+
+Next :::
+
+	Container Orchestration using Kubernetes	
+	
+	
 
 	
 	
