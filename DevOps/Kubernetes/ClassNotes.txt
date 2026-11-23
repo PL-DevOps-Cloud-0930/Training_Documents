@@ -1,0 +1,199 @@
+#########################
+Day - 28 | 23rd Nov. 2026
+#########################	
+	
+	
+	- Assignment on Docker Module - 
+
+	- Integrate below commands and in Jenkins pipeline stages 
+	
+	- Task is to create create Jenkins Pipeline to Perform Java Maven Application Build, Image Build and Push it to Container Registry
+	
+	
+		docker build -t <dockerhub_repository_name>/<New_Image_Name>:<tag> .
+		
+		docker login 
+		
+		docker push <dockerhub_repository_name>/<New_Image_Name>:<tag>	
+		
+	
+	
+	Container Orchestration using Kubernetes :::	
+	
+	Kubernetes Architecture 
+	
+	Kubernetes Architecture Components 
+	
+	Kubernetes Concepts & Terminologies 
+	
+	Kubernetes Installation and Configurations 
+	
+	Core Concepts :
+	
+		- Pods 
+		
+		- Namespaces 
+		
+		- Controller Objects 
+		
+			- Replicaset  
+			- Deployment Controller 
+			
+		- HostPath Volume 
+		
+		- Setup Kubernetes Cluster to perform Continuous Deployment 
+	
+	
+	
+	
+	- Kubernetes :::::
+
+			- It is an Open-Source Container Orchestration Tool 
+			- Kubernetes is used to Deploy any type of Containers.
+			- It is used to ensure high availability of the Applications/services running thru Containers.
+			- Used to Ensure High Availability of Containers by creating Replicas of Containers/Pods.
+			- It supports Auto-Scaling & Load Balancing.	
+			- Supports self-healing.
+			
+			- Used to deploy the Micro-Service Based Applications 	
+			
+			
+			
+	- Environments ::
+	
+		Dev 
+		
+		Build 
+		
+		
+		QA 
+		
+		UAT					===>			Prod  
+		
+		
+		
+	Non-Prod :
+	
+		- Kubernetes Master Node (Control_Plane) - VM 
+			- Kubernetes_WorkerNode1	- VM 
+			- Kubernetes_WorkerNode2	- VM
+			- Kubernetes_WorkerNode3	- VM
+		
+	Prod :
+	
+		- Kubernetes Master Node (Control_Plane) - VM 
+			- Kubernetes_WorkerNode1	- VM 
+			- Kubernetes_WorkerNode2	- VM
+			- Kubernetes_WorkerNode3	- VM
+		
+	
+	Kubernetes Architecture 
+	
+	Kubernetes(K8s) Architecture Components 	
+	
+		- Kubernetes Architecture components :::
+		
+			API_Server 				--> # Acts as an interface to the kubernetes 
+			
+			ETCD 					--> # Single point of Source for Kubernetes Components 
+			
+			Scheduler				--> # To identify the Healthy Node for Deployments
+			
+			Controller Manager 		--> # To run the pods in its desired state 
+			
+			
+			Kubelet 				--> # Is a Kubernetes Agent used to Create & Deploy the Pods
+			
+			KubeProxy				--> # Is used to enable pod networking by create Pod IP Address			
+			
+			CRI - Container RunTime Interface (Container-D)
+									--> # It is used identify the Image from Container Registry for deployment			
+	
+	Kubernetes Terminologies :::
+	
+	
+		Kubernetes Cluster :		# Collection of WorkerNodes.
+		
+		- Kubernetes Master Node (Control_Plane1)									==> AWS/AZURE/On-Prem
+		
+			- Kubernetes Master Node (Control_Plane1) - VM 							==>	AWS 			
+			
+				Kubernetes Cluster 1												==> AWS Mumbai Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM		
+					
+				Kubernetes Cluster 2												==> AWS Tokyo Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM
+					- Kubernetes_WorkerNode4	- VM
+					- Kubernetes_WorkerNode5	- VM
+
+
+				Kubernetes Cluster 3												==> AWS Singapore Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM
+					- Kubernetes_WorkerNode4	- VM
+					- Kubernetes_WorkerNode5	- VM				
+
+
+			- Kubernetes Master Node (Control_Plane2) - VM 							==>	Azure 			
+			
+				Kubernetes Cluster 1												==> Azure Mumbai Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM		
+					
+				Kubernetes Cluster 2												==> Azure Tokyo Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM
+					- Kubernetes_WorkerNode4	- VM
+					- Kubernetes_WorkerNode5	- VM
+
+
+				Kubernetes Cluster 3												==> Azure Singapore Region 
+					- Kubernetes_WorkerNode1	- VM 
+					- Kubernetes_WorkerNode2	- VM
+					- Kubernetes_WorkerNode3	- VM
+					- Kubernetes_WorkerNode4	- VM
+					- Kubernetes_WorkerNode5	- VM	
+					
+					
+							--> Kubernetes core skills:
+							
+								-- Kubernetes Developers 
+								
+								-- Kubernetes Administrator
+								
+								-- Kubernetes Security Administrator
+		
+
+		- Kubernetes Pods 		# 	It is an Atomic unit of schedule
+		
+		- Container Images 		# 	It is a static file, defines the properties and depedencies of the Application/Container.
+									It is Non-Executable
+									It composed of various layer of Instructions created using Dockerfile.
+									
+		- Containers 			# 	Executable entity of the Container-Image
+
+		- Container Registry	# 	It is used to Store and Manage the versions of Container-Images 
+									Eg.: DockerHub 
+									https://hub.docker.com/
+									
+		- Container Repository	#	It is a subset of Container Registry
+		
+		- Kubectl				# 	Is a command line utility to interact with Kubernetes Master  
+		
+		- Kubelet 				#	Kubernetes Agent used to Deploy the Pods 	
+		
+		- Kubeadm 				# 	Is a command line utility to Setup the Kubernetes Architecture
+		
+		
+Next :::
+
+	Kubernetes Installation and Configurations ::: 
+	
+	Core Concepts :
