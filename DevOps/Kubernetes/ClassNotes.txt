@@ -197,3 +197,109 @@ Next :::
 	Kubernetes Installation and Configurations ::: 
 	
 	Core Concepts :
+
+
+
+	
+#########################
+Day - 29 | 24th Nov. 2026
+#########################
+
+	Kubernetes Installation and Configurations :::
+	
+	
+	- Kubernetes Master Node (Control_Plane) - VM 
+		- Kubernetes_WorkerNode1	- VM 
+		- Kubernetes_WorkerNode2	- VM	
+		
+		
+	Kubernetes - Open-Source Container Orchestration Tool :::
+	
+		
+	Managed Services ::
+	
+	AWS 	: ECS/ECR/EKS 
+	
+	AZURE 	: ACS/ACR/AKS 
+
+	GCP		: GCE/GCR/GKE 
+	
+	
+	kubeadm 		# To setup the production grade Kubernetes Architecture	
+	
+	minikube 		
+	
+	K3s 
+	
+	KIND 
+	
+	- Setup Kubernetes Architecture using Kubeadm
+	
+	- Kubernetes_Master:	(VM)					# Control Plane
+			Kubernetes_WorkerNode1 (VM)
+			Kubernetes_WorkerNode2  (VM)
+			
+		Kubernetes Master and Worker Node Configurations :::
+
+			Installation of Kubernetes using Kubeadm :::	
+			
+					1. Launch 3 VMs on AWS Cloud (Ubuntu v24.04) --> (1 Master Node, 2 WorkerNodes)
+				
+				In all the Nodes(i.e., Master Node and WorkerNodes):
+				
+					2. Allow all traffic for all the nodes - just for this demo
+					3. Change the HostName of all the Nodes
+					4. Disable swap configuration in all the nodes
+					5. Install CRI - 'Container-D' in all the nodes
+					6. Install Kubeadm,kubelet,kubectl 
+					7. Enable Kubelet	
+				   
+				Only on Master Node:
+				
+					8. Execute Kubeadm Init Command 		# To initialize Kubernetes Master Node
+					9. Enable user Access to Kubernetes
+					10. Install flannel Network plugins for kubeproxy
+
+				Only on WorkerNodes:		
+				
+					11. Execute Kubeadm Join Command 		# To attach the Worknodes with Kubernetes Master Node.
+					
+					
+	- Work with Kubectl Command Line Utility :::
+	
+		--> to manage the Kubernetes Objects -> pod,deployment,..
+		
+		
+	
+	
+	Syntax:
+	
+		kubectl <command> <kubernetes_Object_Type> <Object_Name> <parameters>
+		
+		
+		kubectl get nodes 
+		
+		kubectl get pods 
+		
+		
+		
+		Namespace :::		Logical Partition of Kubernetes Cluster.
+		
+		
+		Pods :::
+		
+			-> Pod it the atomic unit of scheduling 
+			
+		kubernetes App Configuration file - Manifest file ==> *.yaml 
+		
+		
+			- Create this in Kubernetes Master Node 
+			
+			
+Next ::
+
+	- Create Manifest File for Pod definitions 
+
+	- Pods, Replicasets, Deployment, Hostpath, Services - ClusterIP, NodePort, Load Balancer
+
+	- Intergrate Kubernetes with Jenkins - To create CI/CD pipelines 
