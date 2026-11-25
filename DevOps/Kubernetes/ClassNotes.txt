@@ -303,3 +303,73 @@ Next ::
 	- Pods, Replicasets, Deployment, Hostpath, Services - ClusterIP, NodePort, Load Balancer
 
 	- Intergrate Kubernetes with Jenkins - To create CI/CD pipelines 
+
+
+
+	
+#########################
+Day - 30 | 25th Nov. 2026
+#########################
+	
+	- Create Manifest File for Pod definitions 
+	
+	- Kubernetes Services 
+	
+		- NodePort Service 		==> Expose the Pod to Internet.--> Same as Port Mapping/Port Forwarding
+		
+			--> Create Service Port: 
+		
+		- ClusterIP				==> Is the Default Service --> Applicable within the Cluster.
+		
+		- Load Balancer
+	
+	
+		-> Load Balancing Routing Rules :::
+		
+			
+			- Simple Routing 			->  blog site - With Page
+			
+			- Host Based Routing 
+			
+			- Path Based Routing 
+			
+			- Query Based Routing 
+		
+		
+
+		www.google.com 			==>		Load Balancer IP Address 		--> Home Page Link
+		
+
+		Host Based Routing :
+		
+			www.gmail.google.com 
+			www.maps.google.com 
+			www.translate.google.com
+			
+		Path Based Routing :
+		
+			gmail.com/inbox 
+			gmail.com/sent 
+			gmail.com/trash
+		
+		Query Based Routing 
+			gmail.com/inbox?name=xyz?date=dd/mm/yyyy
+		
+		
+
+	NameSpace :::
+	
+		--> Logical Partition of the Cluster :
+		
+			
+		Non-Prod K8s_Cluster :
+		
+			dev 
+			
+			qa 
+			
+			uat 
+		
+		
+	pod1 --> default namespace 
+	
