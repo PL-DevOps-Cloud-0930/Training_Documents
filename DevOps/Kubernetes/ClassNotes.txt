@@ -373,3 +373,86 @@ Day - 30 | 25th Nov. 2026
 		
 	pod1 --> default namespace 
 	
+
+
+#########################
+Day - 31 | 26th Nov. 2026
+#########################		
+	
+	- Controller Object 
+		
+		- Replicaset
+		
+		- Deployment Controller Object	
+	
+		ReplicaSet :::
+		
+			--> Replicaset is used to execute the specific no. of pods in the cluster.
+			--> Replicaset uses the Set Based Operator
+			--> Used to replicate the pods and able to scale up/down
+			--> The Replicasets will be automatically created, while creating Deployment Controller Object.
+		
+		
+		Deployment Controller Object :::
+		
+			--> It is used to deploy the pods and ensure high availability of pods by creating pod replicas 
+			--> 1. Create Muliple instance/replicas/copies of pods 
+				2. Used to Scale-Up / Scale-Down the Pods 
+				3. Used to Upgrade the application pods 
+				4. Used to Down-grade/roll-back the application pods
+			--> The upgrade/down-grade of application pods can be done without any downtime. 
+			--> To achieve zero-downtime during upgrade/down-grade, By Default, it used Rolling-Update Deployment Strategy.
+				- Supports self-healing.		
+			
+			
+			
+			
+		LIVE :
+		
+			myweb_app_svc_img:v1			====>			myweb_app_svc_img:v2
+			
+			
+			Replica = 3
+			
+				pod1.1:v1					===>			pod1.1:v2
+				pod1.2:v1									pod1.2:v2									
+				pod1.3:v1									pod1.2:v2									 
+				
+			
+				
+		Create Manifest file to work with Deployment Controller Object ::::		
+		
+		Deployment Controller Object creates :
+		
+			- Deployment 
+			- Replicaset
+			- Pod Instances 	-- 3 replicas
+
+		- Create Service Definition :
+	
+	
+	- Hostpath Volume :::
+
+		--> Maintain the persistant data even after the lifetime of the pod. 
+		
+		
+Next :::
+		
+	- Intergrate Kubernetes with Jenkins - To create CI/CD pipelines
+
+	- GitHub Repo.
+	
+	
+	- Ansible 
+	
+	- Terraform
+	
+	- Prometheus & Grafana
+	
+	- Python 
+	
+	
+
+	- AWS ::: 
+	
+	- Azure :::
