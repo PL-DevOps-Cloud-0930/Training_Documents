@@ -456,3 +456,231 @@ Next :::
 	- AWS ::: 
 	
 	- Azure :::
+
+
+	
+	
+#########################
+Day - 32 | 27th Nov. 2026
+#########################
+
+
+	- Intergrate Kubernetes with Jenkins - To create CI/CD pipelines	
+
+CICD Pipeline using Jenkins & Kubernetes
+
+
+
+Stages of CICD  Pipeline :
+
+	- SCM-Checkout
+	- Application Build, Unit Test, Create Artifacts
+	- Application Image Build 
+	- Login to DockerHub 
+	- Push Application Image to DockerHub 
+	- Deploy Application Image to Kubernetes Cluster using Deployment Controller Object
+
+
+Pre-requisites :::
+
+Servers:
+
+	Jenkins_Master 			
+		Jenkins_Slave 		
+		
+	Kubernetes_Master 
+		- Kubernetes_WorkerNode1
+		- Kubernetes_WorkerNode2
+		
+	
+Servers & Purpose :
+
+	Jenkins_Master 				-> Create Jenkins Projects & Schedule to run	
+		Jenkins_Slave 			-> To Build Application, Artifacts, Docker Application Images, Publish to Container Registry		
+		
+	Kubernetes_Master 			-> Deploy the Micro-Services
+		- Kubernetes_WorkerNode1
+		- Kubernetes_WorkerNode2	
+		
+		
+Servers & Tools :
+
+	Jenkins_Master 				-> git,jdk,jenkins 		
+		Jenkins_Slave 			-> git,jdk,maven,docker
+		
+	Kubernetes_Master 			-> Kubernetes Components
+		- Kubernetes_WorkerNode1
+		- Kubernetes_WorkerNode2
+		
+		
+		
+Action Items: 
+
+	1. Source Code Repository -> pom.xml / Dockerfile / Kubernetes_Manifest files
+	
+	2. Create PAT on DockerHub and Updated it on the Jenkins Credential Manager
+	
+	3. Intergrate Kubernetes Master to Jenkins Master :::
+	
+			Use SSH Connection between Jenkins and Kubernetes Master
+			
+				Create a user in Kubernetes Master 
+				Grant Access to Kubectl
+				
+				Use Publish Over SSH Plugins to connect Kubernetes		
+		
+		
+			
+			--> Create DockerHub Access Token.
+				
+					1. Run
+
+						docker login -u loksaieta				# Login ID 
+					
+					2. At the password prompt, enter the personal access token.
+
+						asdfasdfasdfasdfasdfasdf	# PAT		
+				
+				
+
+
+
+Prepare the kubedeploy.yaml in application repository
+	
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loksai-eta-deploy
+  labels:
+    app: loksai-eta-deploy-lbl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: loksai-eta-app
+  template:
+    metadata:
+      labels:
+        app: loksai-eta-app
+    spec:
+      containers:
+      - name: loksai-eta-container
+        image: loksaieta/pljavawebappimg:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loksai-eta-np-service
+  labels:
+    app: loksai-eta-app
+spec:
+  selector:
+    app: loksai-eta-deploy-lbl
+
+  type: NodePort
+  ports:
+  - nodePort: 31028
+    port: 8080
+    targetPort: 8080		
+
+
+
+
+
+
+Onboard Applications to CICD Process:
+	
+Create Jenkins CICD Pipeline: 
+
+
+Stages of CICD  Pipeline :
+
+	- SCM-Checkout
+	- Application Build, Unit Test, Create Artifacts
+	- Application Image Build 
+	- Login to DockerHub 
+	- Push Application Image to DockerHub 
+	- Deploy Application Image to Kubernetes Cluster
+	
+	
+	
+pipeline {
+    agent { label 'slave1' }
+
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+		
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+    }
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Check out'
+				git 'https://github.com/PL-DevOps-Cloud-0930/java-webapp-project.git'				
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Application Build'
+				sh 'mvn clean package'
+            }
+        }
+        stage('Application Image Build') {
+            steps {
+				sh "docker build -t loksaieta/pljavawebappimg:latest ."
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/pljavawebappimg:latest"
+			}
+		}
+		stage('Deploy to Kubernetes') {
+			steps {
+              script{
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'PL_Kubernetes_Master', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f kubedeploy.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			  }				
+			}
+		}
+    }
+}	
+	
+	
+Next :::
+
+	- Intro. to IAC Tool - Configuration Management System - Ansible 
+
+
+		Infra-Structure Management:
+		
+			- IAC - Infra-Structure As Code - Tools
+		
+			Infra-Structure Provisioning/Creating 	::: Terraform/CloudFormation/ARM
+			
+			Infra-Structure Configurations 			::: Ansible/Chef/Puppet
+			
+			
+	Configuration Management using Ansible :::	
+	
+	
+		--> Development Team --> 200 Developers 
+		
+										--> java,python,node,
+										
+										--> Security Patches to be updated 
+		
+		--> 
+	
+	
+		
+	Resource Provisioning using Terraform :::
